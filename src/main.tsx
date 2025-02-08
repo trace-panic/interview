@@ -3,7 +3,7 @@ import { Header } from "@/components/header";
 import { Toaster } from "@/components/ui/toaster";
 import { DashboardLayout } from "@/layouts/dashboard";
 import { Dashboard } from "@/pages/dashboard";
-import { Home } from "@/pages/home";
+import  Home  from "@/pages/home";
 import { Login } from "@/pages/login";
 import SignUp  from "@/pages/SignUp";
 import { StrictMode } from "react";
