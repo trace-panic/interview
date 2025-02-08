@@ -1,5 +1,7 @@
+import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Toaster } from "@/components/ui/toaster";
+import { Home } from "@/pages/home";
 import { Login } from "@/pages/login";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
@@ -13,9 +15,14 @@ const ROUTER = createBrowserRouter([
       <div>
         <Header />
         <Outlet />
+        <Footer />
       </div>
     ),
     children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
       {
         path: "login",
         element: <Login />,
