@@ -23,6 +23,10 @@ import { Link } from "react-router-dom";
 import z from "zod";
 
 const formSchema = z.object({
+  name: z
+    .string({ message: "Name must be a string" })
+    .min(5, { message: "Min length 5 chars" })
+    .max(100, { message: "Max length 100 chars" }),
   email: z
     .string({ message: "Email must be a string" })
     .min(5, { message: "Min length 5 chars" })
@@ -34,12 +38,13 @@ const formSchema = z.object({
     .max(100, { message: "Max length 100 chars" }),
 });
 
-export function Login() {
+export function Signup() {
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
     },
@@ -47,19 +52,34 @@ export function Login() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values);
-    toast({ title: "Login successful" });
+    toast({ title: "Signup successful" });
   };
 
   return (
     <div className="min-h-dvh">
       <Card className="mx-auto mt-10 max-w-sm">
         <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
-          <CardDescription>Enter email and password to login</CardDescription>
+          <CardTitle className="text-2xl">Create Account</CardTitle>
+          <CardDescription>
+            Enter your name, email and password to create an account
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+              <FormField
+                name="name"
+                control={form.control}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="font-semibold">Full name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 name="email"
                 control={form.control}
@@ -93,15 +113,15 @@ export function Login() {
                 )}
               />
               <Button type="submit" className="w-full cursor-pointer">
-                LOGIN
+                SIGNUP
               </Button>
             </form>
           </Form>
         </CardContent>
         <CardFooter className="flex flex-col items-center text-sm">
-          <p className="text-muted-foreground">Don&apos;t have an account?</p>
-          <Link to="/signup" className="mt-3 hover:underline">
-            Signup
+          <p className="text-muted-foreground">Already have an account?</p>
+          <Link to="/login" className="mt-3 hover:underline">
+            Login
           </Link>
         </CardFooter>
       </Card>
