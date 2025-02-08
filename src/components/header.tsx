@@ -1,5 +1,6 @@
 import { ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Button } from "./ui/button";
 
 export function Header() {
   return (
@@ -17,16 +18,9 @@ export function Header() {
               </div>
             </Link>
           </div>
-          <Link to="/signup">
-            <button className="bg-black text-white px-8 py-2 rounded-md font-semibold">
-              Sign up
-            </button>
-          </Link>
-          <Link to="/login">
-            <button className="text-black border-black bg-white border-2 px-8 py-2 rounded-md font-semibold">
-              Login
-            </button>
-          </Link>
+          <Button asChild size="sm" className="px-4">
+            <Link to="/login">Login</Link>
+          </Button>
         </div>
       </div>
     </div>

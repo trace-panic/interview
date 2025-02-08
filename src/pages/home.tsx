@@ -1,11 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { FaShoppingCart, FaHeart } from "react-icons/fa";
+import { Heart, ShoppingCart } from "lucide-react";
+import { useEffect, useState } from "react";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+
+interface Product {
+  id: number;
+  title: string;
+  image: string;
+}
 
 const Home = () => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [newProduct, setNewProduct] = useState("");
 
   useEffect(() => {
@@ -23,7 +29,7 @@ const Home = () => {
     setNewProduct("");
   };
 
-  const deleteProduct = (id) => {
+  const deleteProduct = (id: number) => {
     setProducts(products.filter((product) => product.id !== id));
   };
 
@@ -56,7 +62,10 @@ const Home = () => {
     <div className="container mx-auto p-6">
       <Slider {...sliderSettings} className="mb-6">
         {flashSales.map((sale, index) => (
-          <div key={index} className="bg-black text-white p-6 rounded-lg text-center">
+          <div
+            key={index}
+            className="bg-black text-white p-6 rounded-lg text-center"
+          >
             <h2 className="text-2xl font-bold text-red-500">
               🔥 {sale.title} 🔥
             </h2>
@@ -95,8 +104,8 @@ const Home = () => {
             <h3 className="text-lg font-semibold mb-2">{product.title}</h3>
             <div className="flex items-center justify-between">
               <div className="flex space-x-2">
-                <FaShoppingCart className="cursor-pointer" />
-                <FaHeart className="cursor-pointer" />
+                <ShoppingCart className="cursor-pointer" />
+                <Heart className="cursor-pointer" />
               </div>
               <div></div>
             </div>
