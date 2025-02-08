@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export function Header() {
   return (
-    <div className="border-b h-14 w-full sticky top-0 z-20">
+    <div className="border-b h-14 w-full bg-background sticky top-0 z-20">
       <div className="container px-4 mx-auto flex justify-between pt-2.5 items-center">
         <Link to="/" className="text-2xl sm:text-3xl font-semibold">
           <span className="text-red-500">The</span> Band
