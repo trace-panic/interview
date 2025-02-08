@@ -1,6 +1,7 @@
 import { Header } from "@/components/header";
 import { Toaster } from "@/components/ui/toaster";
 import { Login } from "@/pages/login";
+import SignUp  from "@/pages/SignUp";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
@@ -19,6 +20,10 @@ const ROUTER = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "signup", 
+        element: <SignUp />,
       },
     ],
   },
