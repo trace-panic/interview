@@ -5,6 +5,7 @@ import { DashboardLayout } from "@/layouts/dashboard";
 import { Dashboard } from "@/pages/dashboard";
 import { Home } from "@/pages/home";
 import { Login } from "@/pages/login";
+import SignUp  from "@/pages/SignUp";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import {
@@ -41,6 +42,10 @@ const ROUTER = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "signup",
+        element: <SignUp />,
       },
       {
         path: "dashboard",
