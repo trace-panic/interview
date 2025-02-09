@@ -2,6 +2,8 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Toaster } from "@/components/ui/toaster";
 import { DashboardLayout } from "@/layouts/dashboard";
+import { AuthProvider } from "@/lib/context";
+import { ProtectedRoute } from "@/lib/protected";
 import Cart from "@/pages/cart";
 import { Dashboard } from "@/pages/dashboard";
 import Home from "@/pages/home";
@@ -56,7 +58,11 @@ const ROUTER = createBrowserRouter([
       },
       {
         path: "dashboard",
-        element: <DashboardLayout />,
+        element: (
+          <ProtectedRoute>
+            <DashboardLayout />
+          </ProtectedRoute>
+        ),
         children: [
           {
             path: "",
@@ -78,7 +84,9 @@ const ROUTER = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={ROUTER} />
-    <Toaster />
+    <AuthProvider>
+      <RouterProvider router={ROUTER} />
+      <Toaster />
+    </AuthProvider>
   </StrictMode>,
 );

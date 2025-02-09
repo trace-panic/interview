@@ -17,9 +17,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/lib/context";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import z from "zod";
 
 const formSchema = z.object({
@@ -40,6 +41,8 @@ const formSchema = z.object({
 
 export function Signup() {
   const { toast } = useToast();
+  const { signup } = useAuth();
+  const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -50,9 +53,15 @@ export function Signup() {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-    toast({ title: "Signup successful" });
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    try {
+      signup(values.email, values.password, values.name);
+      toast({ title: "Signup successful" });
+      navigate("/dashboard");
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_) {
+      toast({ title: "Signup failed", variant: "destructive" });
+    }
   };
 
   return (
