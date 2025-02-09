@@ -17,9 +17,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/lib/context";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import z from "zod";
 
 const formSchema = z.object({
@@ -35,7 +36,9 @@ const formSchema = z.object({
 });
 
 export function Login() {
+  const { login } = useAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -45,9 +48,15 @@ export function Login() {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-    toast({ title: "Login successful" });
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    try {
+      login(values.email, values.password);
+      toast({ title: "Login successful" });
+      navigate("/dashboard");
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_) {
+      toast({ title: "Invalid credentials", variant: "destructive" });
+    }
   };
 
   return (
