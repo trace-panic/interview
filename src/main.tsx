@@ -2,9 +2,12 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Toaster } from "@/components/ui/toaster";
 import { DashboardLayout } from "@/layouts/dashboard";
+import Cart from "@/pages/cart";
 import { Dashboard } from "@/pages/dashboard";
-import  Home  from "@/pages/home";
+import Home from "@/pages/home";
 import { Login } from "@/pages/login";
+import { CreateProduct } from "@/pages/new-product";
+import ProductsTable from "@/pages/products";
 import { Signup } from "@/pages/signup";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
@@ -48,12 +51,24 @@ const ROUTER = createBrowserRouter([
         element: <Signup />,
       },
       {
+        path: "cart",
+        element: <Cart />,
+      },
+      {
         path: "dashboard",
         element: <DashboardLayout />,
         children: [
           {
-            path: "/dashboard",
+            path: "",
             element: <Dashboard />,
+          },
+          {
+            path: "products",
+            element: <ProductsTable />,
+          },
+          {
+            path: "products/new",
+            element: <CreateProduct />,
           },
         ],
       },
